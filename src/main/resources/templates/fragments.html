@@ -27,5 +27,13 @@
         </div>
     </div>
 
+    <table th:fragment="results" class="results" th:each="job: ${jobs}">
+        <tr th:each="mapping: ${job}" th:switch="${mapping.key}">
+            <td th:text="${#strings.capitalizeWords(mapping.key)}"></td>
+            <td th:case="'name'" th:text="${mapping.value}"></td>
+            <td th:case="*"><a th:href="@{/list/jobs(column=${mapping.key},value=${mapping.value})}" th:text="${mapping.value}"></a></td>
+        </tr>
+        <br /><br />
+    </table>
 </body>
 </html>
